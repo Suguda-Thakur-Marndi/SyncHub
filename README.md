@@ -151,7 +151,7 @@ The backend exposes REST endpoints under the configured API base path, typically
 | `/api/workspace` | Yes | Create and manage workspaces |
 | `/api/member` | Yes | Manage workspace members and roles |
 | `/api/project` | Yes | Create and manage projects inside workspaces |
-| `/api/task` | Yes | Create, assign, and update tasks |
+| `/api/task` | Yes | Create, assign, and update tasks | 
 
 ---
 
