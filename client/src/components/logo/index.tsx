@@ -1,4 +1,4 @@
-import { AudioWaveform } from "lucide-react";
+import { Layers } from "lucide-react";
 import { Link } from "react-router-dom";
 
 type LogoProps = {
@@ -8,8 +8,8 @@ type LogoProps = {
 
 const Logo = ({ url = "/", asLink = true }: LogoProps) => {
   const icon = (
-    <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-      <AudioWaveform className="size-4" />
+    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 text-white shadow-md shadow-indigo-500/25 transition-transform duration-200 hover:scale-105">
+      <Layers className="size-5" />
     </div>
   );
 
