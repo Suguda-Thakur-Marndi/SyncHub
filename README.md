@@ -21,16 +21,38 @@ A full-stack workspace and project management application for teams to collabora
 - Node.js
 - Express 5
 - TypeScript
-- MongoDB + Mongoose 9
-- Passport.js for local and Google OAuth authentication
-- Cookie-session, CORS, JWT-compatible session handling, Zod validation
+- MongoDB with Mongoose 9
+- Passport.js with local and Google OAuth 2.0 strategies
+- Express Session for cookie-based authentication sessions
+- CORS and dotenv for HTTP and environment configuration
+- bcryptjs for password hashing
+- jsonwebtoken and UUID for token and identifier utilities
+- Zod for request validation
+- ts-node-dev for development and TypeScript for builds
 
 ### Frontend
-- React 19
-- Vite
+- React 19 and React DOM
+- Vite with the React and Tailwind CSS plugins
 - TypeScript
 - Tailwind CSS 4
-- React Query, React Hook Form, TanStack Table, Radix UI primitives
+- React Router DOM for client-side routing
+- TanStack React Query for server-state management
+- TanStack React Table for data tables
+- Axios for API requests
+- React Hook Form with Zod resolvers for forms and validation
+- Radix UI primitives for accessible UI components
+- Lucide React for icons
+- Framer Motion for animations
+- Emoji Mart for emoji selection
+- date-fns and React Day Picker for date handling
+- clsx, tailwind-merge, and class-variance-authority for styling utilities
+- nuqs for URL query-state management
+
+### Development and quality tooling
+- ESLint with React Hooks and React Refresh plugins
+- TypeScript ESLint
+- Vite preview server
+- npm for package management
 
 ---
 
