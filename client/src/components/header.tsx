@@ -3,7 +3,7 @@ import useWorkspaceId from "@/hooks/use-workspace-id";
 import { useTheme } from "@/context/theme-provider";
 import { useAuthContext } from "@/context/auth-provider";
 import useGetWorkspaceQuery from "@/hooks/api/use-get-workspace";
-import { Sun, Moon, Bell, Search, UserPlus } from "lucide-react";
+import { Sun, Moon, Search, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -14,12 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import InviteMember from "@/components/workspace/member/invite-member";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import NotificationCenter from "@/components/workspace/notifications/notification-center";
 import { getAvatarColor } from "@/lib/helper";
 
 const Header = () => {
@@ -88,32 +83,8 @@ const Header = () => {
           </DialogContent>
         </Dialog>
 
-        {/* Notifications Dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-all cursor-pointer relative shrink-0">
-              <Bell className="h-4 w-4" />
-              <span className="absolute top-2.5 right-2.5 h-1.5 w-1.5 rounded-full bg-rose-500 animate-pulse" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-80 p-2 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900" align="end">
-            <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800/60 mb-1">
-              <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Notifications</h4>
-            </div>
-            <div className="flex flex-col gap-0.5 max-h-60 overflow-y-auto scrollbar">
-              <DropdownMenuItem className="flex flex-col items-start gap-1 rounded-xl p-2.5 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
-                <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">New Task Assigned</span>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400">You were assigned to "Implement dashboard redesign".</span>
-                <span className="text-[9px] text-slate-400 dark:text-slate-500 mt-1">2 hours ago</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex flex-col items-start gap-1 rounded-xl p-2.5 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
-                <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Project Completed</span>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400">Workspace project "API Integration" marked done.</span>
-                <span className="text-[9px] text-slate-400 dark:text-slate-500 mt-1">1 day ago</span>
-              </DropdownMenuItem>
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {/* Notifications Center */}
+        <NotificationCenter />
 
         {/* Theme Toggle */}
         <button

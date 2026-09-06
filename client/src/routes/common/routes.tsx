@@ -8,6 +8,7 @@ import Settings from "@/page/workspace/Settings";
 import Tasks from "@/page/workspace/Tasks";
 import Projects from "@/page/workspace/Projects";
 import Calendar from "@/page/workspace/Calendar";
+import Reports from "@/page/workspace/Reports";
 import { AUTH_ROUTES, BASE_ROUTE, PROTECTED_ROUTES } from "./routePaths";
 import InviteUser from "@/page/invite/InviteUser";
 import Landing from "@/page/landing/Landing";
@@ -27,6 +28,7 @@ export const protectedRoutePaths = [
   { path: PROTECTED_ROUTES.PROJECT_DETAILS, element: <ProjectDetails /> },
   { path: PROTECTED_ROUTES.PROJECTS, element: <Projects /> },
   { path: PROTECTED_ROUTES.CALENDAR, element: <Calendar /> },
+  { path: PROTECTED_ROUTES.REPORTS, element: <Reports /> },
 ];
 
 export const baseRoutePaths = [

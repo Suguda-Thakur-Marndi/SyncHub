@@ -17,6 +17,7 @@ export const PROTECTED_ROUTES = {
   PROJECT_DETAILS: "/workspace/:workspaceId/project/:projectId",
   PROJECTS: "/workspace/:workspaceId/projects",
   CALENDAR: "/workspace/:workspaceId/calendar",
+  REPORTS: "/workspace/:workspaceId/reports",
 };
 
 export const BASE_ROUTE = {

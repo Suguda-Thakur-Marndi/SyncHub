@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   FolderKanban,
   Calendar,
+  BarChart3,
 } from "lucide-react";
 import {
   SidebarGroup,
@@ -62,6 +63,11 @@ export function NavMain() {
       title: "Calendar",
       url: `/workspace/${workspaceId}/calendar`,
       icon: Calendar,
+    },
+    {
+      title: "Reports",
+      url: `/workspace/${workspaceId}/reports`,
+      icon: BarChart3,
     },
     ...(canManageSettings
       ? [
