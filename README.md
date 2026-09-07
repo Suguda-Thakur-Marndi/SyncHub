@@ -7,11 +7,15 @@ A full-stack workspace and project management application for teams to collabora
 ## ✨ What the app does
 
 - Create and manage workspaces for different teams or organizations
-- Invite members and assign roles/permissions
-- Create projects inside each workspace
-- Create, assign, and update tasks with status tracking
+- Invite members, format join dates, and assign roles/permissions with permission guarding
+- Create projects inside each workspace with both Grid and List view layouts
+- Create, assign, and update tasks with Table and Kanban views
+- Accessible WCAG 2.2 AA single-pointer alternative for keyboard and assistive task movements
+- Gantt schedule timeline, file asset management, and team discussion threads
+- Honest workspace metrics (Active Projects, My Tasks, Completed Tasks, Overdue Tasks)
+- Light, Dark, and System theme customization in Workspace Settings
 - Support local authentication and Google OAuth sign-in
-- Use session-based authentication with cookie-based security
+- Use session-based authentication with secure cookie management
 
 ---
 
@@ -72,14 +76,18 @@ group-project-management-platform/
 │   │   ├── utils/           # Helper utilities and custom errors
 │   │   └── validation/      # Request validation schemas
 │   └── package.json
+├── design-system/
+│   └── group-project-management/
+│       ├── MASTER.md        # Global tokens, typography, colors, and accessibility standards
+│       └── pages/           # Page-specific design specifications (dashboard, projects, etc.)
 ├── client/
 │   ├── src/
 │   │   ├── components/      # Reusable UI components
-│   │   ├── context/         # Auth and query context providers
+│   │   ├── context/         # Auth, query, and theme context providers
 │   │   ├── hooks/           # Custom hooks
-│   │   ├── layout/          # Main layouts
+│   │   ├── layout/          # Main layouts (Sidebar, Header, Resizer)
 │   │   ├── lib/             # API and helper utilities
-│   │   ├── page/            # App pages
+│   │   ├── page/            # App pages (Dashboard, Projects, Tasks, Calendar, Reports, Settings)
 │   │   ├── routes/          # Routing setup
 │   │   └── types/           # TypeScript types
 │   └── package.json
@@ -177,4 +185,6 @@ The backend exposes REST endpoints under the configured API base path, typically
 
 ---
 
+## 📄 License
 
+This project is licensed under the terms of the [MIT License](LICENSE).
