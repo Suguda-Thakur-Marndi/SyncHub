@@ -59,8 +59,11 @@ const Header = () => {
         <input
           type="text"
           placeholder="Search projects, tasks, members..."
-          className="w-full h-10 pl-10 pr-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 dark:focus:border-indigo-500/80 transition-all text-xs font-medium"
+          className="w-full h-10 pl-10 pr-12 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 dark:focus:border-indigo-500/80 transition-all text-xs font-medium"
         />
+        <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700 pointer-events-none select-none">
+          ⌘K
+        </kbd>
       </div>
 
       {/* Right: Actions (Invite, Notification, Theme, User Avatar) */}

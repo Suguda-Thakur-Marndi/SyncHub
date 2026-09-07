@@ -156,10 +156,12 @@ const SignIn = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                        Email
+                        Email Address
                       </FormLabel>
                       <FormControl>
                         <Input
+                          type="email"
+                          autoComplete="email"
                           placeholder="you@company.com"
                           className="h-11 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-500 text-sm"
                           {...field}
@@ -176,20 +178,14 @@ const SignIn = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="flex items-center justify-between">
-                        <FormLabel className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                          Password
-                        </FormLabel>
-                        <a
-                          href="#"
-                          className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 transition-colors"
-                        >
-                          Forgot password?
-                        </a>
-                      </div>
+                      <FormLabel className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                        Password
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="password"
+                          autoComplete="current-password"
+                          placeholder="Enter your password"
                           className="h-11 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-500 text-sm"
                           {...field}
                         />

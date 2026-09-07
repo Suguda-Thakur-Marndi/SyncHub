@@ -1,4 +1,4 @@
-import { CheckSquare, Clock, CheckCircle2, Loader } from "lucide-react";
+import { CheckSquare, Clock, CheckCircle2, FolderKanban, Loader } from "lucide-react";
 
 const cardConfig: Record<
   string,
@@ -11,31 +11,64 @@ const cardConfig: Record<
     icon: React.ElementType;
   }
 > = {
+  "Active Projects": {
+    dotColor: "bg-indigo-500",
+    iconColor: "text-indigo-600 dark:text-indigo-400",
+    iconBg: "bg-indigo-50 dark:bg-indigo-950/40",
+    trendText: "Active workspace initiatives",
+    trendColor: "text-indigo-600 dark:text-indigo-400",
+    icon: FolderKanban,
+  },
+  "My Tasks": {
+    dotColor: "bg-blue-500",
+    iconColor: "text-blue-600 dark:text-blue-400",
+    iconBg: "bg-blue-50 dark:bg-blue-950/40",
+    trendText: "Assigned directly to you",
+    trendColor: "text-blue-600 dark:text-blue-400",
+    icon: CheckSquare,
+  },
   "Total Task": {
     dotColor: "bg-indigo-500",
     iconColor: "text-indigo-600 dark:text-indigo-400",
     iconBg: "bg-indigo-50 dark:bg-indigo-950/40",
-    trendText: "+8% from last week",
+    trendText: "Across all projects",
     trendColor: "text-indigo-600 dark:text-indigo-400",
     icon: CheckSquare,
+  },
+  "Overdue Tasks": {
+    dotColor: "bg-rose-500",
+    iconColor: "text-rose-600 dark:text-rose-400",
+    iconBg: "bg-rose-50 dark:bg-rose-950/30",
+    trendText: "Requires immediate attention",
+    trendColor: "text-rose-600 dark:text-rose-400",
+    icon: Clock,
   },
   "Overdue Task": {
     dotColor: "bg-rose-500",
     iconColor: "text-rose-600 dark:text-rose-400",
     iconBg: "bg-rose-50 dark:bg-rose-950/30",
-    trendText: "-3% from yesterday",
+    trendText: "Requires attention",
     trendColor: "text-rose-600 dark:text-rose-400",
     icon: Clock,
+  },
+  "Completed Tasks": {
+    dotColor: "bg-emerald-500",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
+    iconBg: "bg-emerald-50 dark:bg-emerald-950/40",
+    trendText: "Successfully shipped",
+    trendColor: "text-emerald-600 dark:text-emerald-400",
+    icon: CheckCircle2,
   },
   "Completed Task": {
     dotColor: "bg-emerald-500",
     iconColor: "text-emerald-600 dark:text-emerald-400",
     iconBg: "bg-emerald-50 dark:bg-emerald-950/40",
-    trendText: "+12% this month",
+    trendText: "Successfully shipped",
     trendColor: "text-emerald-600 dark:text-emerald-400",
     icon: CheckCircle2,
   },
 };
+
 
 const AnalyticsCard = (props: {
   title: string;

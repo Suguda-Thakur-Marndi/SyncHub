@@ -1,6 +1,13 @@
 import * as React from "react";
-import { Check, ChevronDown, Loader, Plus } from "lucide-react";
+import { Check, ChevronDown, Loader, Plus, Settings } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
+import useWorkspaceId from "@/hooks/use-workspace-id";
+import useCreateWorkspaceDialog from "@/hooks/use-create-workspace-dialog";
+import { useQuery } from "@tanstack/react-query";
+import { getAllWorkspacesUserIsMemberQueryFn } from "@/lib/api";
+import useGetWorkspaceMembers from "@/hooks/api/use-get-workspace-members";
+import useGetProjectsInWorkspaceQuery from "@/hooks/api/use-get-projects";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,13 +22,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useNavigate } from "react-router-dom";
-import useWorkspaceId from "@/hooks/use-workspace-id";
-import useCreateWorkspaceDialog from "@/hooks/use-create-workspace-dialog";
-import { useQuery } from "@tanstack/react-query";
-import { getAllWorkspacesUserIsMemberQueryFn } from "@/lib/api";
-import useGetWorkspaceMembers from "@/hooks/api/use-get-workspace-members";
-import useGetProjectsInWorkspaceQuery from "@/hooks/api/use-get-projects";
 
 type WorkspaceType = {
   _id: string;
@@ -144,15 +144,30 @@ export function WorkspaceSwitcher() {
               className="flex items-center gap-3 rounded-xl px-2.5 py-2 cursor-pointer text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50/55 dark:hover:bg-indigo-950/20 focus:bg-indigo-50/55 dark:focus:bg-indigo-950/20 focus:text-indigo-600 text-sm font-semibold transition-colors"
               onClick={onOpen}
             >
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-dashed border-slate-300 dark:border-slate-700">
-                <Plus className="w-4.5 h-4.5 text-slate-400" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-dashed border-indigo-300 dark:border-indigo-700">
+                <Plus className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span>New workspace</span>
+              <span>Create workspace</span>
             </DropdownMenuItem>
+
+            {workspaceId && (
+              <DropdownMenuItem
+                asChild
+                className="flex items-center gap-3 rounded-xl px-2.5 py-2 cursor-pointer text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-semibold transition-colors"
+              >
+                <Link to={`/workspace/${workspaceId}/settings`}>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700">
+                    <Settings className="w-4 h-4 text-slate-400" />
+                  </div>
+                  <span>Workspace settings</span>
+                </Link>
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
   );
 }
+
 

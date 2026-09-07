@@ -16,18 +16,18 @@ const AppLayoutContent = ({
   isResizing: boolean;
   handleResizeStart: (event: React.MouseEvent<HTMLDivElement>) => void;
 }) => {
-  const { open } = useSidebar();
+  const { open, isMobile } = useSidebar();
   const currentLeft = open ? sidebarWidth : 72;
 
   return (
     <div className={`relative flex min-h-svh w-full ${isResizing ? "select-none cursor-col-resize" : ""}`}>
       <Asidebar />
-      {open && (
+      {open && !isMobile && (
         <div
           role="separator"
           aria-orientation="vertical"
           onMouseDown={handleResizeStart}
-          className={`absolute top-0 bottom-0 z-50 w-1.5 cursor-col-resize transition-colors ${
+          className={`hidden md:block absolute top-0 bottom-0 z-50 w-1.5 cursor-col-resize transition-colors ${
             isResizing ? "bg-indigo-500/70 dark:bg-indigo-400/70" : "hover:bg-indigo-500/40 dark:hover:bg-indigo-400/40"
           }`}
           style={{ left: `${currentLeft}px` }}

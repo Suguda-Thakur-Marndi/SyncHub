@@ -1,7 +1,9 @@
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useCreateProjectDialog from "@/hooks/use-create-project-dialog";
+import CreateTaskDialog from "@/components/workspace/task/create-task-dialog";
 import WorkspaceAnalytics from "@/components/workspace/workspace-analytics";
+
 import RecentProjects from "@/components/workspace/project/recent-projects";
 import { useAuthContext } from "@/context/auth-provider";
 import useWorkspaceId from "@/hooks/use-workspace-id";
@@ -67,13 +69,20 @@ const WorkspaceDashboard = () => {
             <span className="font-extrabold text-indigo-600 dark:text-indigo-400">{activeProjectsCount}</span> active projects today.
           </p>
         </div>
-        <Button
-          onClick={onOpen}
-          className="h-10 px-4 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white font-semibold transition-all rounded-xl shadow-sm cursor-pointer flex items-center gap-1.5 shrink-0 self-start sm:self-auto"
-        >
-          <Plus className="h-4 w-4" />
-          New Project
-        </Button>
+        <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0 flex-wrap">
+          <CreateTaskDialog
+            buttonVariant="outline"
+            buttonText="Create Task"
+            buttonClassName="h-10 px-4 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold transition-all rounded-xl shadow-xs cursor-pointer flex items-center gap-1.5 shrink-0"
+          />
+          <Button
+            onClick={onOpen}
+            className="h-10 px-4 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white font-semibold transition-all rounded-xl shadow-sm cursor-pointer flex items-center gap-1.5 shrink-0"
+          >
+            <Plus className="h-4 w-4" />
+            Create Project
+          </Button>
+        </div>
       </div>
 
       {/* Analytics Cards */}

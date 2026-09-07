@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Loader, LogOut, Settings } from "lucide-react";
+import { HelpCircle, Loader, LogOut, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarHeader,
@@ -25,6 +25,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Logo from "@/components/logo";
 import LogoutDialog from "./logout-dialog";
+import HelpDialog from "./help-dialog";
 import { WorkspaceSwitcher } from "./workspace-switcher";
 import { NavMain } from "./nav-main";
 import { NavProjects } from "./nav-projects";
@@ -38,6 +39,8 @@ const Asidebar = () => {
   const { open } = useSidebar();
   const workspaceId = useWorkspaceId();
   const [isOpen, setIsOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+
 
   const userInitials = [
     user?.name?.split(" ")?.[0]?.charAt(0),
@@ -112,10 +115,19 @@ const Asidebar = () => {
                   
                   {/* Action Buttons */}
                   <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      onClick={() => setIsHelpOpen(true)}
+                      className="h-8 w-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                      title="Help & Shortcuts"
+                      aria-label="Help and shortcuts"
+                    >
+                      <HelpCircle className="h-4 w-4" />
+                    </button>
                     <Link
                       to={`/workspace/${workspaceId}/settings`}
                       className="h-8 w-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
                       title="Settings"
+                      aria-label="Workspace settings"
                     >
                       <Settings className="h-4 w-4" />
                     </Link>
@@ -123,6 +135,7 @@ const Asidebar = () => {
                       onClick={() => setIsOpen(true)}
                       className="h-8 w-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                       title="Logout"
+                      aria-label="Log out"
                     >
                       <LogOut className="h-4 w-4" />
                     </button>
@@ -134,7 +147,7 @@ const Asidebar = () => {
                   <DropdownMenuTrigger asChild>
                     <SidebarMenuButton
                       size="lg"
-                      className="w-full rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-0 flex items-center justify-center"
+                      className="w-full rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-0 flex items-center justify-center cursor-pointer"
                     >
                       <Avatar className="h-9 w-9 rounded-full ring-2 ring-slate-100 dark:ring-slate-800/80">
                         <AvatarImage src={user?.profilePicture || ""} />
@@ -161,6 +174,14 @@ const Asidebar = () => {
                     </div>
 
                     <DropdownMenuGroup>
+                      <DropdownMenuItem
+                        onClick={() => setIsHelpOpen(true)}
+                        className="cursor-pointer rounded-xl px-2.5 py-2 flex items-center gap-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <HelpCircle className="h-4 w-4 text-slate-400" />
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">Help & Shortcuts</span>
+                      </DropdownMenuItem>
+
                       <DropdownMenuItem
                         asChild
                         className="cursor-pointer rounded-xl px-2.5 py-2 flex items-center gap-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -192,8 +213,10 @@ const Asidebar = () => {
       </Sidebar>
 
       <LogoutDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+      <HelpDialog isOpen={isHelpOpen} setIsOpen={setIsHelpOpen} />
     </>
   );
 };
+
 
 export default Asidebar;

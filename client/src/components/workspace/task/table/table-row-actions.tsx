@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Row } from "@tanstack/react-table";
-import { MoreHorizontal, Pencil } from "lucide-react";
+import { Eye, MoreHorizontal, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +17,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useWorkspaceId from "@/hooks/use-workspace-id";
 import { deleteTaskMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
-import EditTaskDialog from "../edit-task-dialog"; // Import the Edit Dialog
+import EditTaskDialog from "../edit-task-dialog";
+import TaskDetailsDialog from "../task-details-dialog";
 
 interface DataTableRowActionsProps {
   row: Row<TaskType>;
@@ -25,7 +26,8 @@ interface DataTableRowActionsProps {
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const [openDeleteDialog, setOpenDialog] = useState(false);
-  const [openEditDialog, setOpenEditDialog] = useState(false); // State for edit dialog
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   const queryClient = useQueryClient();
   const workspaceId = useWorkspaceId();
@@ -58,15 +60,18 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
-            <MoreHorizontal />
-            <span className="sr-only">Open menu</span>
+          <Button variant="ghost" className="flex h-8 w-8 p-0 data-[state=open]:bg-muted cursor-pointer" aria-label="Open task actions menu">
+            <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[160px]">
+        <DropdownMenuContent align="end" className="w-[160px] rounded-xl shadow-lg border border-slate-200 dark:border-slate-800">
+          {/* View Details Option */}
+          <DropdownMenuItem className="cursor-pointer" onClick={() => setOpenDetailsDialog(true)}>
+            <Eye className="w-4 h-4 mr-2 text-slate-500" /> View Details
+          </DropdownMenuItem>
           {/* Edit Task Option */}
           <DropdownMenuItem className="cursor-pointer" onClick={() => setOpenEditDialog(true)}>
-            <Pencil className="w-4 h-4 mr-2" /> Edit Task
+            <Pencil className="w-4 h-4 mr-2 text-slate-500" /> Edit Task
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
@@ -81,8 +86,16 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         </DropdownMenuContent>
       </DropdownMenu>
 
+      {/* Task Details Dialog */}
+      <TaskDetailsDialog
+        task={task}
+        isOpen={openDetailsDialog}
+        onClose={() => setOpenDetailsDialog(false)}
+      />
+
       {/* Edit Task Dialog */}
       <EditTaskDialog task={task} isOpen={openEditDialog} onClose={() => setOpenEditDialog(false)} />
+
 
       {/* Delete Task Confirmation Dialog */}
       <ConfirmDialog

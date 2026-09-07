@@ -154,6 +154,7 @@ const SignUp = () => {
                       <FormControl>
                         <Input
                           placeholder="John Doe"
+                          autoComplete="name"
                           className="h-11 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-500 text-sm"
                           {...field}
                         />
@@ -174,7 +175,9 @@ const SignUp = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          type="email"
                           placeholder="you@company.com"
+                          autoComplete="email"
                           className="h-11 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-500 text-sm"
                           {...field}
                         />
@@ -197,6 +200,7 @@ const SignUp = () => {
                         <Input
                           type="password"
                           placeholder="Create a strong password"
+                          autoComplete="new-password"
                           className="h-11 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-500 text-sm"
                           {...field}
                         />
