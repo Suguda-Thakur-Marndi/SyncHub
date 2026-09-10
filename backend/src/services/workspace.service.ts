@@ -8,6 +8,7 @@ import { BadRequestException, NotFoundException } from "../utils/appError";
 import TaskModel from "../models/task.model";
 import { TaskStatusEnum } from "../enums/task.enum";
 import ProjectModel from "../models/project.model";
+import { cacheService } from "./cache.service";
 
 //********************************
 // CREATE NEW WORKSPACE
@@ -144,28 +145,57 @@ export const getWorkspaceMembersService = async (workspaceId: string) => {
 };
 
 export const getWorkspaceAnalyticsService = async (workspaceId: string) => {
+  const cacheKey = `workspace:analytics:${workspaceId}`;
+  const cached = await cacheService.get<{
+    totalTasks: number;
+    overdueTasks: number;
+    completedTasks: number;
+  }>(cacheKey);
+
+  if (cached) {
+    return { analytics: cached };
+  }
+
   const currentDate = new Date();
+  const wsObjectId = new mongoose.Types.ObjectId(workspaceId);
 
-  const totalTasks = await TaskModel.countDocuments({
-    workspace: workspaceId,
-  });
-
-  const overdueTasks = await TaskModel.countDocuments({
-    workspace: workspaceId,
-    dueDate: { $lt: currentDate },
-    status: { $ne: TaskStatusEnum.DONE },
-  });
-
-  const completedTasks = await TaskModel.countDocuments({
-    workspace: workspaceId,
-    status: TaskStatusEnum.DONE,
-  });
+  const [result] = await TaskModel.aggregate([
+    { $match: { workspace: wsObjectId } },
+    {
+      $group: {
+        _id: null,
+        totalTasks: { $sum: 1 },
+        overdueTasks: {
+          $sum: {
+            $cond: [
+              {
+                $and: [
+                  { $ne: ["$status", TaskStatusEnum.DONE] },
+                  { $lt: ["$dueDate", currentDate] },
+                ],
+              },
+              1,
+              0,
+            ],
+          },
+        },
+        completedTasks: {
+          $sum: {
+            $cond: [{ $eq: ["$status", TaskStatusEnum.DONE] }, 1, 0],
+          },
+        },
+      },
+    },
+  ]);
 
   const analytics = {
-    totalTasks,
-    overdueTasks,
-    completedTasks,
+    totalTasks: result?.totalTasks || 0,
+    overdueTasks: result?.overdueTasks || 0,
+    completedTasks: result?.completedTasks || 0,
   };
+
+  // Cache for 60 seconds
+  await cacheService.set(cacheKey, analytics, 60);
 
   return { analytics };
 };

@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-09-09T20:27:06.044Z",
+  "benchmarkSummary": {
+    "tasksProcessed": 5721,
+    "syncBlockingLatencyMs": 115,
+    "asyncEnqueueLatencyMs": 0.491,
+    "httpLatencyReduction": "234.1x faster",
+    "backgroundWorkerDurationMs": 166.89,
+    "csvFileSizeBytes": 683568,
+    "csvFileSizeKb": 667.55
+  },
+  "queueStats": {
+    "totalJobs": 2,
+    "queueDepth": 1,
+    "pending": 1,
+    "processing": 0,
+    "completed": 1,
+    "failed": 0
+  },
+  "progressSnapshots": [
+    {
+      "timeMs": 0,
+      "status": "pending",
+      "progress": 0
+    },
+    {
+      "timeMs": 55.2,
+      "status": "processing",
+      "progress": 55
+    },
+    {
+      "timeMs": 106.7,
+      "status": "processing",
+      "progress": 92
+    }
+  ]
+}

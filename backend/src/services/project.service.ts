@@ -3,6 +3,7 @@ import ProjectModel from "../models/project.model";
 import TaskModel from "../models/task.model";
 import { NotFoundException } from "../utils/appError";
 import { TaskStatusEnum } from "../enums/task.enum";
+import { cacheService } from "./cache.service";
 
 export const createProjectService = async (
   userId: string,
@@ -82,9 +83,19 @@ export const getProjectAnalyticsService = async (
     );
   }
 
+  const cacheKey = `project:analytics:${workspaceId}:${projectId}`;
+  const cached = await cacheService.get<{
+    totalTasks: number;
+    overdueTasks: number;
+    completedTasks: number;
+  }>(cacheKey);
+
+  if (cached) {
+    return { analytics: cached };
+  }
+
   const currentDate = new Date();
 
-  //USING Mongoose aggregate
   const taskAnalytics = await TaskModel.aggregate([
     {
       $match: {
@@ -92,40 +103,42 @@ export const getProjectAnalyticsService = async (
       },
     },
     {
-      $facet: {
-        totalTasks: [{ $count: "count" }],
-        overdueTasks: [
-          {
-            $match: {
-              dueDate: { $lt: currentDate },
-              status: {
-                $ne: TaskStatusEnum.DONE,
+      $group: {
+        _id: null,
+        totalTasks: { $sum: 1 },
+        overdueTasks: {
+          $sum: {
+            $cond: [
+              {
+                $and: [
+                  { $ne: ["$dueDate", null] },
+                  { $lt: ["$dueDate", currentDate] },
+                  { $ne: ["$status", TaskStatusEnum.DONE] },
+                ],
               },
-            },
+              1,
+              0,
+            ],
           },
-          {
-            $count: "count",
+        },
+        completedTasks: {
+          $sum: {
+            $cond: [{ $eq: ["$status", TaskStatusEnum.DONE] }, 1, 0],
           },
-        ],
-        completedTasks: [
-          {
-            $match: {
-              status: TaskStatusEnum.DONE,
-            },
-          },
-          { $count: "count" },
-        ],
+        },
       },
     },
   ]);
 
-  const _analytics = taskAnalytics[0];
+  const agg = taskAnalytics[0] || {};
 
   const analytics = {
-    totalTasks: _analytics.totalTasks[0]?.count || 0,
-    overdueTasks: _analytics.overdueTasks[0]?.count || 0,
-    completedTasks: _analytics.completedTasks[0]?.count || 0,
+    totalTasks: agg.totalTasks || 0,
+    overdueTasks: agg.overdueTasks || 0,
+    completedTasks: agg.completedTasks || 0,
   };
+
+  await cacheService.set(cacheKey, analytics, 60);
 
   return {
     analytics,

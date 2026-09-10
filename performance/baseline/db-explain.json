@@ -1,0 +1,122 @@
+[
+  {
+    "queryName": "Task Listing (workspace + sort createdAt)",
+    "description": "Default workspace task table view (page 1, 10 items sorted by createdAt desc)",
+    "executionTimeMillis": 22,
+    "totalDocsExamined": 5000,
+    "totalKeysExamined": 0,
+    "nReturned": 10,
+    "stage": "SORT",
+    "hasSortStage": true,
+    "isIndexUsed": false,
+    "notes": "In-memory sort required due to missing compound index"
+  },
+  {
+    "queryName": "Task Listing by Status (IN_PROGRESS)",
+    "description": "Kanban column query and status filtering",
+    "executionTimeMillis": 7,
+    "totalDocsExamined": 5000,
+    "totalKeysExamined": 0,
+    "nReturned": 10,
+    "stage": "SORT",
+    "hasSortStage": true,
+    "isIndexUsed": false,
+    "notes": "Full collection scan across all workspace tasks"
+  },
+  {
+    "queryName": "Task Listing by Priority (HIGH)",
+    "description": "Priority filtering in task table",
+    "executionTimeMillis": 10,
+    "totalDocsExamined": 5000,
+    "totalKeysExamined": 0,
+    "nReturned": 10,
+    "stage": "SORT",
+    "hasSortStage": true,
+    "isIndexUsed": false,
+    "notes": "Full collection scan across tasks"
+  },
+  {
+    "queryName": "Project Tasks by Status (TODO)",
+    "description": "Project detail task view and board filtering",
+    "executionTimeMillis": 6,
+    "totalDocsExamined": 5000,
+    "totalKeysExamined": 0,
+    "nReturned": 0,
+    "stage": "LIMIT",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "Full collection scan"
+  },
+  {
+    "queryName": "Tasks by Assignee",
+    "description": "My Tasks / Assigned To member filter",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 109,
+    "totalKeysExamined": 0,
+    "nReturned": 10,
+    "stage": "LIMIT",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "Full collection scan"
+  },
+  {
+    "queryName": "Task Search (Regex substring)",
+    "description": "Keyword search in task table filter toolbar",
+    "executionTimeMillis": 9,
+    "totalDocsExamined": 1142,
+    "totalKeysExamined": 0,
+    "nReturned": 10,
+    "stage": "LIMIT",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "Unindexed regex search forces full collection scan"
+  },
+  {
+    "queryName": "Workspace Analytics (Overdue Tasks)",
+    "description": "Count of overdue, incomplete tasks in workspace analytics",
+    "executionTimeMillis": 14,
+    "totalDocsExamined": 5000,
+    "totalKeysExamined": 0,
+    "nReturned": 1002,
+    "stage": "COLLSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "Scans all tasks in collection without index on dueDate/status"
+  },
+  {
+    "queryName": "Project Analytics ($facet Aggregation)",
+    "description": "Three-branch facet aggregation computing project metrics",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 0,
+    "totalKeysExamined": 0,
+    "nReturned": 0,
+    "stage": "COLLSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "Aggregation matching unindexed project field"
+  },
+  {
+    "queryName": "Member Role Authorization Lookup",
+    "description": "Permission verification executed on every protected endpoint",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 14,
+    "totalKeysExamined": 0,
+    "nReturned": 1,
+    "stage": "COLLSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "Unindexed compound lookup on { userId, workspaceId }"
+  },
+  {
+    "queryName": "Project Listing by Workspace",
+    "description": "Fetch all projects in workspace sorted by createdAt",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 6,
+    "totalKeysExamined": 0,
+    "nReturned": 5,
+    "stage": "SORT",
+    "hasSortStage": true,
+    "isIndexUsed": false,
+    "notes": "Unindexed workspace lookup and in-memory sort"
+  }
+]

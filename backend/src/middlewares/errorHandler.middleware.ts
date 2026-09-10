@@ -43,6 +43,7 @@ export const errorHandler: ErrorRequestHandler = (
 
   return res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
     message: "Internal Server Error",
-    error: error?.message || "Unknow error occurred",
+    errorCode: ErrorCodeEnum.INTERNAL_SERVER_ERROR,
+    ...(process.env.NODE_ENV === "development" && { error: error?.message }),
   });
 };

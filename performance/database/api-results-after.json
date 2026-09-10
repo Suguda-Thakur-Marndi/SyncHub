@@ -1,0 +1,101 @@
+[
+  {
+    "endpoint": "POST /api/auth/login",
+    "method": "POST",
+    "p50": 2307,
+    "p99": 3653,
+    "avgLatency": 2458.73,
+    "requestsPerSec": 3.6,
+    "totalRequests": 18,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "GET /api/workspace/all",
+    "method": "GET",
+    "p50": 87,
+    "p99": 1398,
+    "avgLatency": 129.28,
+    "requestsPerSec": 76.6,
+    "totalRequests": 383,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "GET /api/workspace/:id",
+    "method": "GET",
+    "p50": 188,
+    "p99": 301,
+    "avgLatency": 195.76,
+    "requestsPerSec": 50.2,
+    "totalRequests": 251,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "GET /api/project/workspace/:workspaceId/all",
+    "method": "GET",
+    "p50": 146,
+    "p99": 287,
+    "avgLatency": 161.51,
+    "requestsPerSec": 61.4,
+    "totalRequests": 307,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "GET /api/task/workspace/:workspaceId/all (Page 1, 10 items)",
+    "method": "GET",
+    "p50": 139,
+    "p99": 217,
+    "avgLatency": 141.54,
+    "requestsPerSec": 69.8,
+    "totalRequests": 349,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "POST /api/task/project/:proj/workspace/:ws/create",
+    "method": "POST",
+    "p50": 115,
+    "p99": 215,
+    "avgLatency": 119.1,
+    "requestsPerSec": 82.6,
+    "totalRequests": 413,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "PUT /api/task/:id/project/:proj/workspace/:ws/update",
+    "method": "PUT",
+    "p50": 131,
+    "p99": 233,
+    "avgLatency": 139.14,
+    "requestsPerSec": 71.41,
+    "totalRequests": 357,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "GET /api/workspace/analytics/:id",
+    "method": "GET",
+    "p50": 104,
+    "p99": 224,
+    "avgLatency": 111.28,
+    "requestsPerSec": 89,
+    "totalRequests": 445,
+    "errorCount": 0,
+    "errorRate": 0
+  },
+  {
+    "endpoint": "GET /api/project/:id/workspace/:ws/analytics ($facet)",
+    "method": "GET",
+    "p50": 86,
+    "p99": 120,
+    "avgLatency": 87.36,
+    "requestsPerSec": 113.2,
+    "totalRequests": 566,
+    "errorCount": 0,
+    "errorRate": 0
+  }
+]

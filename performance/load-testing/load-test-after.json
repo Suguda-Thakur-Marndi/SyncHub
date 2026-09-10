@@ -1,0 +1,46 @@
+[
+  {
+    "concurrentUsers": 10,
+    "requestsPerSec": 298.11,
+    "totalRequests": 2981,
+    "p50": 31,
+    "p99": 69,
+    "avgLatency": 33.02,
+    "errorCount": 0,
+    "errorRate": 0,
+    "status": "PASSED"
+  },
+  {
+    "concurrentUsers": 50,
+    "requestsPerSec": 369.5,
+    "totalRequests": 3695,
+    "p50": 132,
+    "p99": 202,
+    "avgLatency": 134.63,
+    "errorCount": 0,
+    "errorRate": 0,
+    "status": "PASSED"
+  },
+  {
+    "concurrentUsers": 100,
+    "requestsPerSec": 375.8,
+    "totalRequests": 3758,
+    "p50": 255,
+    "p99": 397,
+    "avgLatency": 262.56,
+    "errorCount": 0,
+    "errorRate": 0,
+    "status": "PASSED"
+  },
+  {
+    "concurrentUsers": 250,
+    "requestsPerSec": 371.7,
+    "totalRequests": 3717,
+    "p50": 649,
+    "p99": 927,
+    "avgLatency": 655.22,
+    "errorCount": 0,
+    "errorRate": 0,
+    "status": "PASSED"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-09-09T20:28:50.709Z",
+  "metrics": {
+    "connectedClients": 20,
+    "eventsEmitted": 50,
+    "totalExpectedDeliveries": 1000,
+    "totalReceivedDeliveries": 1000,
+    "deliverySuccessRate": "100.00%",
+    "crossRoomIsolationVerified": true,
+    "latencyMs": {
+      "min": 0.68,
+      "max": 2.61,
+      "avg": 1.19,
+      "p50": 1.1,
+      "p95": 1.82,
+      "p99": 2.36
+    }
+  }
+}

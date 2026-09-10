@@ -79,6 +79,14 @@ const taskSchema = new Schema<TaskDocument>(
   }
 );
 
+taskSchema.index({ workspace: 1, createdAt: -1 });
+taskSchema.index({ workspace: 1, status: 1, createdAt: -1 });
+taskSchema.index({ workspace: 1, priority: 1, createdAt: -1 });
+taskSchema.index({ workspace: 1, project: 1, status: 1 });
+taskSchema.index({ workspace: 1, assignedTo: 1, status: 1 });
+taskSchema.index({ workspace: 1, dueDate: 1, status: 1 });
+taskSchema.index({ project: 1 });
+
 const TaskModel = mongoose.model<TaskDocument>("Task", taskSchema);
 
 export default TaskModel;

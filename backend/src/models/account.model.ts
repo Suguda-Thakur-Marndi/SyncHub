@@ -40,5 +40,7 @@ const accountSchema = new Schema<AccountDocument>(
   }
 );
 
+accountSchema.index({ userId: 1 });
+
 const AccountModel = mongoose.model<AccountDocument>("Account", accountSchema);
 export default AccountModel;

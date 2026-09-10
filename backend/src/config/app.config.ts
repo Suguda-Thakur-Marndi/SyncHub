@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { getEnv } from "../utils/get-env";
 
 const appConfig = () => ({
@@ -15,6 +16,10 @@ const appConfig = () => ({
 
   FRONTEND_ORIGIN: getEnv("FRONTEND_ORIGIN", "localhost"),
   FRONTEND_GOOGLE_CALLBACK_URL: getEnv("FRONTEND_GOOGLE_CALLBACK_URL"),
+
+  REDIS_URL: getEnv("REDIS_URL", ""),
+  REDIS_HOST: getEnv("REDIS_HOST", "127.0.0.1"),
+  REDIS_PORT: getEnv("REDIS_PORT", "6379"),
 });
 
 export const config = appConfig();

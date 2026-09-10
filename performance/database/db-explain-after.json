@@ -1,0 +1,110 @@
+[
+  {
+    "queryName": "Task Listing (workspace + sort createdAt)",
+    "description": "Default workspace task table view (page 1, 10 items sorted by createdAt desc)",
+    "executionTimeMillis": 40,
+    "totalDocsExamined": 10,
+    "totalKeysExamined": 10,
+    "nReturned": 10,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed sort via { workspace: 1, createdAt: -1 }"
+  },
+  {
+    "queryName": "Task Listing by Status (IN_PROGRESS)",
+    "description": "Kanban column query and status filtering",
+    "executionTimeMillis": 1,
+    "totalDocsExamined": 10,
+    "totalKeysExamined": 10,
+    "nReturned": 10,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via { workspace: 1, status: 1, createdAt: -1 }"
+  },
+  {
+    "queryName": "Task Listing by Priority (HIGH)",
+    "description": "Priority filtering in task table",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 10,
+    "totalKeysExamined": 10,
+    "nReturned": 10,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via { workspace: 1, priority: 1, createdAt: -1 }"
+  },
+  {
+    "queryName": "Project Tasks by Status (TODO)",
+    "description": "Project detail task view and board filtering",
+    "executionTimeMillis": 8,
+    "totalDocsExamined": 10,
+    "totalKeysExamined": 10,
+    "nReturned": 10,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via { workspace: 1, project: 1, status: 1 }"
+  },
+  {
+    "queryName": "Tasks by Assignee",
+    "description": "My Tasks / Assigned To member filter",
+    "executionTimeMillis": 3,
+    "totalDocsExamined": 10,
+    "totalKeysExamined": 10,
+    "nReturned": 10,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via { workspace: 1, assignedTo: 1, status: 1 }"
+  },
+  {
+    "queryName": "Workspace Analytics (Overdue Tasks)",
+    "description": "Count of overdue, incomplete tasks in workspace analytics",
+    "executionTimeMillis": 18,
+    "totalDocsExamined": 1002,
+    "totalKeysExamined": 1003,
+    "nReturned": 1002,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via { workspace: 1, dueDate: 1, status: 1 }"
+  },
+  {
+    "queryName": "Project Analytics ($facet Aggregation)",
+    "description": "Three-branch facet aggregation computing project metrics",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 0,
+    "totalKeysExamined": 0,
+    "nReturned": 0,
+    "stage": "COLLSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": false,
+    "notes": "COLLSCAN"
+  },
+  {
+    "queryName": "Member Role Authorization Lookup",
+    "description": "Permission verification executed on every protected endpoint",
+    "executionTimeMillis": 1,
+    "totalDocsExamined": 1,
+    "totalKeysExamined": 1,
+    "nReturned": 1,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via compound unique { userId: 1, workspaceId: 1 }"
+  },
+  {
+    "queryName": "Project Listing by Workspace",
+    "description": "Fetch all projects in workspace sorted by createdAt",
+    "executionTimeMillis": 0,
+    "totalDocsExamined": 5,
+    "totalKeysExamined": 5,
+    "nReturned": 5,
+    "stage": "IXSCAN",
+    "hasSortStage": false,
+    "isIndexUsed": true,
+    "notes": "Indexed via { workspace: 1, createdAt: -1 }"
+  }
+]

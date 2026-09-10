@@ -40,5 +40,7 @@ const projectSchema = new Schema<ProjectDocument>(
   }
 );
 
+projectSchema.index({ workspace: 1, createdAt: -1 });
+
 const ProjectModel = mongoose.model<ProjectDocument>("Project", projectSchema);
 export default ProjectModel;

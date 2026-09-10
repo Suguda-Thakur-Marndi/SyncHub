@@ -3,6 +3,8 @@ import MemberModel from "../models/member.model";
 import ProjectModel from "../models/project.model";
 import TaskModel from "../models/task.model";
 import { BadRequestException, NotFoundException } from "../utils/appError";
+import { cacheService } from "./cache.service";
+import { socketService } from "./socket.service";
 
 export const createTaskService = async (
   workspaceId: string,
@@ -50,6 +52,13 @@ export const createTaskService = async (
 
   await task.save();
 
+  // Invalidate cached analytics for workspace and project
+  await cacheService.del(`workspace:analytics:${workspaceId}`);
+  await cacheService.del(`project:analytics:${workspaceId}:${projectId}`);
+
+  // Broadcast real-time event to workspace peers
+  socketService.broadcastTaskCreated(workspaceId, task);
+
   return { task };
 };
 
@@ -94,6 +103,13 @@ export const updateTaskService = async (
     throw new BadRequestException("Failed to update task");
   }
 
+  // Invalidate cached analytics for workspace and project
+  await cacheService.del(`workspace:analytics:${workspaceId}`);
+  await cacheService.del(`project:analytics:${workspaceId}:${projectId}`);
+
+  // Broadcast real-time event to workspace peers
+  socketService.broadcastTaskUpdated(workspaceId, updatedTask);
+
   return { updatedTask };
 };
 
@@ -133,7 +149,8 @@ export const getAllTasksService = async (
   }
 
   if (filters.keyword && filters.keyword !== undefined) {
-    query.title = { $regex: filters.keyword, $options: "i" };
+    const escapedKeyword = filters.keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    query.title = { $regex: escapedKeyword, $options: "i" };
   }
 
   if (filters.dueDate) {
@@ -210,6 +227,15 @@ export const deleteTaskService = async (
       "Task not found or does not belong to the specified workspace"
     );
   }
+
+  // Invalidate cached analytics for workspace and project
+  await cacheService.del(`workspace:analytics:${workspaceId}`);
+  if (task.project) {
+    await cacheService.del(`project:analytics:${workspaceId}:${task.project}`);
+  }
+
+  // Broadcast real-time event to workspace peers
+  socketService.broadcastTaskDeleted(workspaceId, taskId, task.project?.toString());
 
   return;
 };

@@ -16,14 +16,16 @@ API.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const { data, status } = error.response;
+    const data = error.response?.data;
+    const status = error.response?.status;
 
-    if (data === "Unauthorized" && status === 401) {
+    if ((data === "Unauthorized" || data?.message === "Unauthorized") && status === 401) {
       window.location.href = "/";
     }
 
     const customError: CustomError = {
       ...error,
+      message: data?.message || error.message || "An unexpected network error occurred",
       errorCode: data?.errorCode || "UNKNOWN_ERROR",
     };
 

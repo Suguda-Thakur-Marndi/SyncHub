@@ -1,0 +1,41 @@
+[
+  {
+    "approach": "3x countDocuments() (Baseline Workspace)",
+    "roundTrips": 3,
+    "totalTimeMs": 1102.37,
+    "avgTimeMs": 11.02,
+    "totalDocsExamined": 1002,
+    "results": {
+      "totalTasks": 5721,
+      "overdueTasks": 1002,
+      "completedTasks": 999
+    },
+    "notes": "3 separate network round-trips to MongoDB. Each query executes independently."
+  },
+  {
+    "approach": "$facet Aggregation (1 round-trip, 3 sub-pipelines)",
+    "roundTrips": 1,
+    "totalTimeMs": 5822.29,
+    "avgTimeMs": 58.22,
+    "totalDocsExamined": 5000,
+    "results": {
+      "totalTasks": 5721,
+      "overdueTasks": 1002,
+      "completedTasks": 999
+    },
+    "notes": "Single network round-trip. Matches documents once, then branches into 3 memory streams."
+  },
+  {
+    "approach": "Single-Pass $group + $cond (Optimized Single Pipeline)",
+    "roundTrips": 1,
+    "totalTimeMs": 2036.73,
+    "avgTimeMs": 20.37,
+    "totalDocsExamined": 5000,
+    "results": {
+      "totalTasks": 5721,
+      "overdueTasks": 1002,
+      "completedTasks": 999
+    },
+    "notes": "Streamed single-pass aggregation without branching sub-pipelines."
+  }
+]

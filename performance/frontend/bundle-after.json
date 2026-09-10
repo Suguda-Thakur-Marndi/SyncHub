@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-09-09T20:36:25.000Z",
+  "comparison": {
+    "baseline": {
+      "type": "Monolithic Unsplit Bundle",
+      "entryJsSizeBytes": 1732689,
+      "entryJsSizeKb": 1692.08,
+      "entryJsGzipKb": 459.91,
+      "chunkCount": 1
+    },
+    "optimized": {
+      "type": "Code-Split Lazy Loaded Chunks",
+      "entryJsSizeBytes": 584714,
+      "entryJsSizeKb": 571.01,
+      "entryJsGzipKb": 179.79,
+      "entrySizeReductionPercent": 66.25,
+      "entryGzipReductionPercent": 60.91,
+      "chunkCount": 30
+    }
+  },
+  "routeChunks": [
+    { "name": "Landing", "sizeKb": 42.38, "gzipKb": 9.15 },
+    { "name": "Dashboard", "sizeKb": 21.38, "gzipKb": 5.05 },
+    { "name": "Tasks", "sizeKb": 2.64, "gzipKb": 0.99 },
+    { "name": "Projects", "sizeKb": 11.99, "gzipKb": 3.12 },
+    { "name": "Calendar", "sizeKb": 6.22, "gzipKb": 2.05 },
+    { "name": "Reports", "sizeKb": 17.44, "gzipKb": 3.64 },
+    { "name": "Settings", "sizeKb": 15.80, "gzipKb": 3.90 },
+    { "name": "Sign-in", "sizeKb": 6.33, "gzipKb": 2.13 },
+    { "name": "Sign-up", "sizeKb": 6.89, "gzipKb": 2.12 },
+    { "name": "Members", "sizeKb": 7.07, "gzipKb": 2.51 },
+    { "name": "ProjectDetails", "sizeKb": 27.01, "gzipKb": 7.44 }
+  ],
+  "vendorChunks": [
+    { "name": "vendor-react", "sizeKb": 49.97, "gzipKb": 17.76 },
+    { "name": "vendor-tanstack", "sizeKb": 89.35, "gzipKb": 24.65 },
+    { "name": "vendor-icons", "sizeKb": 20.73, "gzipKb": 6.90 },
+    { "name": "vendor-date", "sizeKb": 71.09, "gzipKb": 21.02 },
+    { "name": "vendor-framer", "sizeKb": 122.70, "gzipKb": 40.08 },
+    { "name": "vendor-emoji", "sizeKb": 509.86, "gzipKb": 110.17 }
+  ]
+}

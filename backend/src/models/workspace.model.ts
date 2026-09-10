@@ -31,6 +31,8 @@ const workspaceSchema = new Schema<WorkspaceDocument>(
   }
 );
 
+workspaceSchema.index({ owner: 1 });
+
 workspaceSchema.methods.resetInviteCode = function () {
   this.inviteCode = generateInviteCode();
 };

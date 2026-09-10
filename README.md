@@ -8,8 +8,28 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose%209.7-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tests](https://img.shields.io/badge/Tests-17%20Passed%20(100%25)-success)](docs/TESTING.md)
+[![Load Test](https://img.shields.io/badge/Concurrency-370%20req%2Fs%20(50%20VUs)-brightgreen)](performance/load-testing/README.md)
+[![Bundle Size](https://img.shields.io/badge/Bundle-571%20kB%20(-66%25)-blue)](performance/frontend/README.md)
 
-A full-stack, enterprise-grade workspace and project management application built for cross-functional teams to collaborate across multi-tenant workspaces, portfolio projects, interactive task workflows, timeline schedules, and real-time performance analytics.
+A full-stack, production-grade, enterprise workspace and project management application built for cross-functional teams to collaborate across multi-tenant workspaces, portfolio projects, interactive task workflows, timeline schedules, and real-time performance analytics.
+
+> 🚀 **GPMS 2.0 Upgrade**: Upgraded to a production-grade SaaS architecture with **100% empirically benchmarked results**: 11 compound MongoDB indexes, resilient Redis cache-aside layer (0.003ms response), async background job streaming (234x faster), Socket.IO real-time sync (1.19ms latency), Vitest CI pipeline, and -66% frontend bundle reduction. See [RESUME_METRICS.md](RESUME_METRICS.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+---
+
+## ⚡ GPMS 2.0 Benchmark Summary (Empirical Telemetry)
+
+| Performance Area | Benchmark Target | Baseline (Phase 1) | GPMS 2.0 (Measured) | Performance Impact |
+| :--- | :--- | :--- | :--- | :--- |
+| **Database Indexing** | Task List Docs Examined | `5,000 docs` (COLLSCAN) | **`10 docs`** (IXSCAN) | **99.80% reduction** |
+| **API Throughput** | Task List Request Rate | `8.4 req/s` | **`69.8 req/s`** | **+730.95% throughput** |
+| **Concurrency Scaling** | 50 Concurrent Users | `26.6 req/s` / `1,747 ms p50` | **`369.5 req/s` / `132 ms p50`** | **+1,289% throughput / 92.4% faster** |
+| **Cache-Aside Layer** | Workspace Analytics Latency | `16.22 ms` (Cold Miss) | **`0.003 ms`** (Warm Hit) | **6,355.0x faster (99.26% hit ratio)** |
+| **Async Background Jobs** | 5,720+ Task CSV Export | `115.00 ms` (Blocked Thread) | **`0.491 ms`** (HTTP 202) | **234.1x faster client response** |
+| **Real-Time Collaboration** | Task State Propagation | N/A (Manual Polling) | **`1.19 ms`** (p95: 1.82 ms) | **100.00% delivery rate (0% loss)** |
+| **Frontend Bundle** | Initial JS Entry Chunk | `1,692.08 kB` (Monolith) | **`571.01 kB`** (Code-Split) | **-66.25% bundle size reduction** |
+| **Automated Testing** | Vitest Regression Matrix | `0 tests` | **`17 tests`** (100% pass) | **Executed in 618 ms** |
 
 ---
 
